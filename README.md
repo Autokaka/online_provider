@@ -1,6 +1,6 @@
 # online_provider
 
-A flutter state management frmework based on Provider
+Online Provider is a lightweight flutter state management framework based on Provider.
 
 ## Getting Started
 
