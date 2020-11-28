@@ -1,4 +1,4 @@
-import 'package:example/home/creator.dart';
+import 'package:example/root/root.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'OnlineProviderDemo',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomePageCreator(title: "HomePage").build(),
+      home: RootPage(),
     );
   }
 }

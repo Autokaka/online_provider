@@ -2,6 +2,35 @@ part of home;
 
 class HomePageWidget extends OPWidget<HomePageCreator, HomePageComponent> {
   @override
+  List<OPProvider> get bindLifecycleProviders {
+    return [
+      HomePageProvider(),
+    ];
+  }
+
+  void printWidgetLifecycle(String lifecycle) {
+    print("HomePageWidget -> $lifecycle");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    printWidgetLifecycle("initState");
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    printWidgetLifecycle("didChangeDependencies");
+  }
+
+  @override
+  void didUpdateCreator(covariant HomePageCreator oldCreator) {
+    super.didUpdateCreator(oldCreator);
+    printWidgetLifecycle("didUpdateCreator");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -31,5 +60,17 @@ class HomePageWidget extends OPWidget<HomePageCreator, HomePageComponent> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    printWidgetLifecycle("deactivate");
+  }
+
+  @override
+  void dispose() {
+    printWidgetLifecycle("dispose");
+    super.dispose();
   }
 }
