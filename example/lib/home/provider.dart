@@ -8,37 +8,42 @@ class HomePageProvider extends OPProvider<HomePageCreator> {
     notifyListeners();
   }
 
+  void incrementWithoutNotify() => counter++;
+
   void printProviderLifecycle(String lifecycle) {
     print("HomePageProvider -> $lifecycle");
   }
 
   @override
-  FutureOr<void> initState() async {
-    await super.initState();
+  void initState() {
+    super.initState();
     printProviderLifecycle("initState");
+    incrementWithoutNotify();
   }
 
   @override
-  FutureOr<void> didChangeDependencies() async {
-    await super.didChangeDependencies();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     printProviderLifecycle("didChangeDependencies");
+    incrementWithoutNotify();
   }
 
   @override
-  FutureOr<void> didUpdateCreator(covariant HomePageCreator oldCreator) async {
-    await super.didUpdateCreator(oldCreator);
+  void didUpdateCreator(covariant HomePageCreator oldCreator) {
+    super.didUpdateCreator(oldCreator);
     printProviderLifecycle("didUpdateCreator");
+    incrementWithoutNotify();
   }
 
   @override
-  FutureOr<void> deactivate() async {
-    await super.deactivate();
+  void deactivate() {
+    super.deactivate();
     printProviderLifecycle("deactivate");
   }
 
   @override
-  FutureOr<void> dispose() async {
+  void dispose() {
     printProviderLifecycle("dispose");
-    await super.dispose();
+    super.dispose();
   }
 }

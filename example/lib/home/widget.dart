@@ -3,9 +3,7 @@ part of home;
 class HomePageWidget extends OPWidget<HomePageCreator, HomePageComponent> {
   @override
   List<OPProvider> get bindLifecycleProviders {
-    return [
-      HomePageProvider(),
-    ];
+    return [read<HomePageProvider>()];
   }
 
   void printWidgetLifecycle(String lifecycle) {

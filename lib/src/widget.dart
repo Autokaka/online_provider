@@ -76,13 +76,23 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
     }
   }
 
-  @override
-  @protected
-  @mustCallSuper
-  void dispose() {
-    if (bindLifecycleProviders.isNotEmpty) {
-      bindLifecycleProviders.forEach((provider) => provider.dispose());
-    }
-    super.dispose();
-  }
+  /// DO NOT bind dispose method
+  /// since we cannot predict
+  /// whether the lifecycle of provider in
+  /// [bindLifecycleProviders] are
+  /// automatically managed by Provider.
+  /// See [Provider documentation](https://pub.flutter-io.cn/packages/provider)
+  /// for more information.
+  /// Besides of that, we also wish developers to manage
+  /// lifecycle of their providers on their own.
+  ///
+  // @override
+  // @protected
+  // @mustCallSuper
+  // void dispose() {
+  //   if (bindLifecycleProviders.isNotEmpty) {
+  //     bindLifecycleProviders.forEach((provider) => provider.dispose());
+  //   }
+  //   super.dispose();
+  // }
 }
