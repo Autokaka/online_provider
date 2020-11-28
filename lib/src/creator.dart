@@ -16,6 +16,6 @@ class OPCreator extends StatefulWidget {
   OPWidget createWidget() => OPWidget();
 
   @override
-  @protected
+  @deprecated
   OPWidget createState() => createWidget();
 }
