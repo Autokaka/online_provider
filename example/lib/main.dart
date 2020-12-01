@@ -1,8 +1,17 @@
-import 'package:example/root/root.dart';
+import 'package:example/root/creator.dart';
 import 'package:flutter/material.dart';
+import 'package:online_provider/online_provider.dart';
+import 'package:example/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => GlobalProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'OnlineProviderDemo',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: RootPage(),
+      home: RootPageCreator().build(),
     );
   }
 }

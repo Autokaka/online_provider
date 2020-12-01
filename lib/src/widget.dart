@@ -18,16 +18,19 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
   ThemeData get theme => Theme.of(context);
 
   @protected
-  List<OPProvider> get bindLifecycleProviders => [];
+  List<OPProvider> get bindLifecycleProviders => null;
+
+  @protected
+  List<OPProvider> get bindContextProviders => null;
 
   @override
   @protected
   @mustCallSuper
   void initState() {
     super.initState();
-    if (bindLifecycleProviders.isNotEmpty) {
-      bindLifecycleProviders.forEach((provider) => provider.initState());
-    }
+    bindLifecycleProviders?.forEach(
+      (provider) => provider.initState(),
+    );
   }
 
   @override
@@ -36,11 +39,13 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _component = creator.createComponent();
-    _component.bind(context, creator);
-    if (bindLifecycleProviders.isNotEmpty) {
-      bindLifecycleProviders
-          .forEach((provider) => provider.didChangeDependencies());
-    }
+    _component?.bind(context, creator);
+    bindLifecycleProviders?.forEach(
+      (provider) => provider.didChangeDependencies(),
+    );
+    bindContextProviders?.forEach(
+      (provider) => provider.bind(context, creator),
+    );
   }
 
   @override
@@ -56,10 +61,9 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
   @mustCallSuper
   void didUpdateCreator(covariant T oldCreator) {
     _component.bind(context, creator);
-    if (bindLifecycleProviders.isNotEmpty) {
-      bindLifecycleProviders
-          .forEach((provider) => provider.didUpdateCreator(oldCreator));
-    }
+    bindLifecycleProviders?.forEach(
+      (provider) => provider.didUpdateCreator(oldCreator),
+    );
   }
 
   @protected
@@ -71,9 +75,9 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
   @mustCallSuper
   void deactivate() {
     super.deactivate();
-    if (bindLifecycleProviders.isNotEmpty) {
-      bindLifecycleProviders.forEach((provider) => provider.deactivate());
-    }
+    bindLifecycleProviders?.forEach(
+      (provider) => provider.deactivate(),
+    );
   }
 
   /// DO NOT bind dispose method
@@ -90,9 +94,9 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
   // @protected
   // @mustCallSuper
   // void dispose() {
-  //   if (bindLifecycleProviders.isNotEmpty) {
-  //     bindLifecycleProviders.forEach((provider) => provider.dispose());
-  //   }
+  //   bindLifecycleProviders?.forEach(
+  //     (provider) => provider.dispose(),
+  //   );
   //   super.dispose();
   // }
 }

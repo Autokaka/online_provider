@@ -5,7 +5,16 @@ class HomePageProvider extends OPProvider<HomePageCreator> {
 
   void increment() {
     counter++;
+    read<GlobalProvider>().increment();
     notifyListeners();
+  }
+
+  void launchRootPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => RootPageCreator().build(),
+      ),
+    );
   }
 
   void incrementWithoutNotify() => counter++;

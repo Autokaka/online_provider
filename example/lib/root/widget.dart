@@ -1,12 +1,7 @@
-import 'package:example/home/creator.dart';
-import 'package:flutter/material.dart';
+part of root;
 
-class RootPage extends StatefulWidget {
-  @override
-  _RootPageState createState() => _RootPageState();
-}
-
-class _RootPageState extends State<RootPage> {
+class RootPageWidget
+    extends OPWidget<RootPageCreator, OPComponent<RootPageCreator>> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

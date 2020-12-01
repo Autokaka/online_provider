@@ -1,5 +1,7 @@
 library home;
 
+import 'package:example/root/creator.dart';
+import 'package:example/provider.dart';
 import 'package:online_provider/online_provider.dart';
 
 part 'widget.dart';

@@ -5,17 +5,18 @@ class OPCreator extends StatefulWidget {
 
   Widget build() {
     var providers = createProviders();
-    if (providers.isEmpty) return this;
+    if (providers == null || providers.isEmpty) return this;
     return MultiProvider(providers: providers, child: this);
   }
 
-  List<SingleChildWidget> createProviders() => [];
+  List<SingleChildWidget> createProviders() => null;
 
-  OPComponent createComponent() => OPComponent();
+  OPComponent createComponent() => null;
 
-  OPWidget createWidget() => OPWidget();
+  OPWidget createWidget() => null;
 
   @override
+  @protected
   @deprecated
   OPWidget createState() => createWidget();
 }

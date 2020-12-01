@@ -2,6 +2,9 @@ part of home;
 
 class HomePageWidget extends OPWidget<HomePageCreator, HomePageComponent> {
   @override
+  List<OPProvider> get bindContextProviders => bindLifecycleProviders;
+
+  @override
   List<OPProvider> get bindLifecycleProviders {
     return [read<HomePageProvider>()];
   }
@@ -39,15 +42,30 @@ class HomePageWidget extends OPWidget<HomePageCreator, HomePageComponent> {
           Text("这是Widget的视图"),
           component.buildText(),
           component.buildCreatorText(),
-          SizedBox(height: mediaQuery.size.height / 3),
+          component.buildProviderText(),
+          SizedBox(height: mediaQuery.size.height / 4),
           Column(
             children: [
               Text("这是一个计数器, 当前数值为: "),
+              SizedBox(height: 18),
               Text(
                 "${watch<HomePageProvider>().counter}",
                 style: TextStyle(
                   fontSize: 50,
                 ),
+              ),
+              SizedBox(height: 18),
+              Text("这是一个全局计数器, 当前数值为: "),
+              SizedBox(height: 18),
+              Text(
+                "${watch<GlobalProvider>().counter}",
+                style: TextStyle(
+                  fontSize: 50,
+                ),
+              ),
+              TextButton(
+                onPressed: watch<HomePageProvider>().launchRootPage,
+                child: Text("再次打开一个RootPage"),
               ),
             ],
           ),
