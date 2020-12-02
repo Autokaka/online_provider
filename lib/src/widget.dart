@@ -60,7 +60,7 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
   @protected
   @mustCallSuper
   void didUpdateCreator(covariant T oldCreator) {
-    _component.bind(context, creator);
+    _component?.bind(context, creator);
     bindLifecycleProviders?.forEach(
       (provider) => provider.didUpdateCreator(oldCreator),
     );
