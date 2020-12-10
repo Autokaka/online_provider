@@ -27,6 +27,8 @@ class HomePageProvider extends OPProvider<HomePageCreator> {
   void initState() {
     super.initState();
     printProviderLifecycle("initState");
+    print("HomePageCreator.title -> ${creator.title}");
+    print("context -> $context");
     incrementWithoutNotify();
   }
 

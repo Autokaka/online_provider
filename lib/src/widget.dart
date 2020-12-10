@@ -28,6 +28,9 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
   @mustCallSuper
   void initState() {
     super.initState();
+    bindContextProviders?.forEach(
+      (provider) => provider.bind(context, creator),
+    );
     bindLifecycleProviders?.forEach(
       (provider) => provider.initState(),
     );
@@ -42,9 +45,6 @@ class OPWidget<T extends OPCreator, R extends OPComponent<T>> extends State<T> {
     _component?.bind(context, creator);
     bindLifecycleProviders?.forEach(
       (provider) => provider.didChangeDependencies(),
-    );
-    bindContextProviders?.forEach(
-      (provider) => provider.bind(context, creator),
     );
   }
 
